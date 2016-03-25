@@ -1,0 +1,15 @@
+C:\Users\mwadime\Documents\Visual Studio 2013\Projects\kcb-super-app-wp8\Controls\RadialSliderModern\RadialSlider\Bin\Debug\FKLabs.RadialGraph.dll
+C:\Users\mwadime\Documents\Visual Studio 2013\Projects\kcb-super-app-wp8\Controls\RadialSliderModern\RadialSlider\Bin\Debug\FKLabs.RadialGraph.pdb
+C:\Users\mwadime\Documents\Visual Studio 2013\Projects\kcb-super-app-wp8\Controls\RadialSliderModern\RadialSlider\Bin\Debug\Microsoft.Expression.Drawing.dll
+C:\Users\mwadime\Documents\Visual Studio 2013\Projects\kcb-super-app-wp8\Controls\RadialSliderModern\RadialSlider\obj\Debug\RadialGraph.g.cs
+C:\Users\mwadime\Documents\Visual Studio 2013\Projects\kcb-super-app-wp8\Controls\RadialSliderModern\RadialSlider\obj\Debug\FKLabs.RadialGraph.g.resources
+C:\Users\mwadime\Documents\Visual Studio 2013\Projects\kcb-super-app-wp8\Controls\RadialSliderModern\RadialSlider\obj\Debug\FKLabs.RadialGraph.dll
+C:\Users\mwadime\Documents\Visual Studio 2013\Projects\kcb-super-app-wp8\Controls\RadialSliderModern\RadialSlider\obj\Debug\FKLabs.RadialGraph.pdb
+C:\Users\mwadime\Documents\Visual Studio 2013\Projects\kcb-super-app-wp8\Controls\RadialGraph\RadialGraph\Bin\Debug\FKLabs.RadialGraph.dll
+C:\Users\mwadime\Documents\Visual Studio 2013\Projects\kcb-super-app-wp8\Controls\RadialGraph\RadialGraph\Bin\Debug\FKLabs.RadialGraph.pdb
+C:\Users\mwadime\Documents\Visual Studio 2013\Projects\kcb-super-app-wp8\Controls\RadialGraph\RadialGraph\Bin\Debug\Microsoft.Expression.Drawing.dll
+C:\Users\mwadime\Documents\Visual Studio 2013\Projects\kcb-super-app-wp8\Controls\RadialGraph\RadialGraph\obj\Debug\RadialGraph.csprojResolveAssemblyReference.cache
+C:\Users\mwadime\Documents\Visual Studio 2013\Projects\kcb-super-app-wp8\Controls\RadialGraph\RadialGraph\obj\Debug\RadialGraph.g.cs
+C:\Users\mwadime\Documents\Visual Studio 2013\Projects\kcb-super-app-wp8\Controls\RadialGraph\RadialGraph\obj\Debug\FKLabs.RadialGraph.g.resources
+C:\Users\mwadime\Documents\Visual Studio 2013\Projects\kcb-super-app-wp8\Controls\RadialGraph\RadialGraph\obj\Debug\FKLabs.RadialGraph.dll
+C:\Users\mwadime\Documents\Visual Studio 2013\Projects\kcb-super-app-wp8\Controls\RadialGraph\RadialGraph\obj\Debug\FKLabs.RadialGraph.pdb
