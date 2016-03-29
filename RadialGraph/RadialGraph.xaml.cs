@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright (C) 2012-2014 Timo Salomäki
+ * Copyright (C) 2012-2014 Brian Mwadime
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,108 +15,163 @@
  */
 
 using System;
+using System.ComponentModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Ink;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
 using System.Windows.Shapes;
-using System.ComponentModel;
-using System.Threading;
-using System.Linq;
 
 namespace FKLabs
 {
 	public partial class RadialGraph : UserControl
 	{
-		#region Properties
+		#region Dependency Property Registrations
 
-		#region Commonly used values
+		public static readonly DependencyProperty TextProperty = 
+            DependencyProperty.Register("Text", typeof(string), typeof(RadialGraph), new PropertyMetadata(default(string)));
 
-		public string Text
+		public static readonly DependencyProperty EndAngleProperty = 
+            DependencyProperty.Register("EndAngle", typeof(double), typeof(RadialGraph), new PropertyMetadata(default(double)));
+
+		public static readonly DependencyProperty MinimumValueProperty = 
+            DependencyProperty.Register("MinimumValue", typeof(double), typeof(RadialGraph), new PropertyMetadata(default(double)));
+
+		public static readonly DependencyProperty MaximumValueProperty = 
+            DependencyProperty.Register("MaximumValue", typeof(double), typeof(RadialGraph), new PropertyMetadata(default(double)));
+
+		public static readonly DependencyProperty FillProperty = 
+            DependencyProperty.Register("Fill", typeof(Brush), typeof(RadialGraph), new PropertyMetadata(default(Brush)));
+
+		public static readonly DependencyProperty CurrentValueProperty = 
+            DependencyProperty.Register("CurrentValue", typeof(double), typeof(RadialGraph), new PropertyMetadata(default(double)));
+
+		public static readonly DependencyProperty OverflowValueToZeroProperty = 
+            DependencyProperty.Register("OverflowValueToZero", typeof(bool), typeof(RadialGraph), new PropertyMetadata(false));
+
+		public static readonly DependencyProperty AllowKeyboardInputProperty = 
+            DependencyProperty.Register("AllowKeyboardInput", typeof(bool), typeof(RadialGraph), new PropertyMetadata(default(bool)));
+
+		public static readonly DependencyProperty ShowSliderValueProperty = 
+            DependencyProperty.Register("ShowSliderValue", typeof(bool), typeof(RadialGraph), new PropertyMetadata(false));
+
+        #endregion Dependency Property Registrations
+
+        #region Properties
+
+        //public string Text
+        //{
+        //	get
+        //	{
+        //		return sliderTextBoxText;
+        //	}
+
+        //	set
+        //	{
+        //		sliderTextBoxText = value;
+
+        //		if (!showSliderValue)
+        //		{
+        //			SliderValueTextBox.Text = sliderTextBoxText;
+        //		}
+        //	}
+        //}
+
+        public string Text
+        {
+            get { return (string)GetValue(TextProperty); }
+            set
+            {
+                SetValue(TextProperty, value);
+            }
+        }
+
+        //      public double EndAngle
+        //{
+        //	get
+        //	{
+        //		return Slider.EndAngle;
+        //	}
+
+        //	private set
+        //	{
+        //		Slider.EndAngle = value;
+        //	}
+        //}
+
+        public double EndAngle
+        {
+            get { return (double)GetValue(EndAngleProperty); }
+            set
+            {
+                SetValue(EndAngleProperty, value);
+            }
+        }
+
+        public double MinimumValue
+        {
+            get { return (double)GetValue(MinimumValueProperty); }
+            set { SetValue(MinimumValueProperty, value); }
+        }
+
+        public double MaximumValue
+        {
+            get { return (double)GetValue(MaximumValueProperty); }
+            set { SetValue(MaximumValueProperty, value); }
+        }
+
+        public Brush Fill
+        {
+            get { return (Brush)GetValue(FillProperty); }
+            set { SetValue(FillProperty, value); }
+        }
+
+        //public double MinimumValue
+        //{
+        //	get { return minimumValue; }
+        //	set { minimumValue = value; }
+        //}
+
+        //public double MaximumValue
+        //{
+        //	get { return maximumValue; }
+        //	set { maximumValue = value; }
+        //}
+
+        //public double CurrentValue
+        //{
+        //	get { return currentValue; }
+        //	set { currentValue = value; SetSliderValue(value, false); }
+        //}
+
+        #endregion Properties
+
+        // The brush used to fill the slider track
+        [Category("Appearance")]
+		public Brush SliderBrush
 		{
-			get { return (string)GetValue(TextProperty); }
-			set { 
-				SetValue(TextProperty, value); 
-			}
-		}
-
-		public static readonly DependencyProperty TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(RadialGraph), new PropertyMetadata(""));
-
-		public double EndAngle
-		{
-			get { return (double)GetValue(EndAngleProperty); }
-			set { 
-				SetValue(EndAngleProperty, value); 
-			}
-		}
-
-		public static readonly DependencyProperty EndAngleProperty = DependencyProperty.Register("EndAngle", typeof(double), typeof(RadialGraph), new PropertyMetadata(0d));
-
-		public double MinimumValue
-		{
-			get { return (double)GetValue(MinimumValueProperty); }
-			set { SetValue(MinimumValueProperty, value); }
-		}
-
-		public static readonly DependencyProperty MinimumValueProperty = DependencyProperty.Register("MinimumValue", typeof(double), typeof(RadialGraph), new PropertyMetadata(0d));
-
-		public double MaximumValue
-		{
-			get { return (double) GetValue(MaximumValueProperty); }
-			set { SetValue(MaximumValueProperty, value); }
-		}
-
-		public static readonly DependencyProperty MaximumValueProperty = DependencyProperty.Register("MaximumValue", typeof(double), typeof(RadialGraph), new PropertyMetadata(0d));
-
-
-		public Brush Fill
-		{
-			get { return (Brush)GetValue(FillProperty); }
-			set { SetValue(FillProperty, value); }
-		}
-
-		public static readonly DependencyProperty FillProperty = DependencyProperty.Register("FillValue", typeof(Brush), typeof(RadialGraph), new PropertyMetadata("#6abd46"));
-
-		public double CurrentValue
-		{
-			get { return (double) GetValue(CurrentValueProperty); }
-			set { 
-				SetValue(CurrentValueProperty, value); 
-			}
-		}
-
-		public static readonly DependencyProperty CurrentValueProperty = DependencyProperty.Register("CurrentValue", typeof(double), typeof(RadialGraph), new PropertyMetadata(0d));
-
-		#endregion
-
-		#region Brushes
-
-		// The brush used to fill the slider track
-		[Category("Appearance")]
-		public Brush SliderBrush {
-			get {
+			get
+			{
 				return Slider.Fill;
 			}
-			
-			set {
+
+			set
+			{
 				Slider.Fill = value;
 			}
 		}
-		
-		#endregion
-
-		#region Opacities and visibilities
 
 		[Category("Appearance")]
-		public double SliderOpacity {
-			get {
+		public double SliderOpacity
+		{
+			get
+			{
 				return Slider.Opacity;
 			}
-			
-			set {
+
+			set
+			{
 				Slider.Opacity = value;
 			}
 		}
@@ -136,10 +191,6 @@ namespace FKLabs
 			}
 		}
 
-		#endregion
-
-		#region Booleans
-
 		/// <summary>
 		/// In case someone inserts a value over the maximum by using the textbox input, set the CurrentValue
 		/// to zero if this is true. Otherwise the CurrentValue is set to the maximum value
@@ -150,15 +201,11 @@ namespace FKLabs
 			set { SetValue(OverflowValueToZeroProperty, value); }
 		}
 
-		public static readonly DependencyProperty OverflowValueToZeroProperty = DependencyProperty.Register("OverflowValueToZero", typeof(bool), typeof(RadialGraph), new PropertyMetadata(false));
-
 		public bool AllowKeyboardInput
 		{
 			get { return (bool)GetValue(AllowKeyboardInputProperty); }
-			set { SetValue(AllowKeyboardInputProperty, value); }
+			set { SetValueCustom(AllowKeyboardInputProperty, value); }
 		}
-
-		public static readonly DependencyProperty AllowKeyboardInputProperty = DependencyProperty.Register("AllowKeyboardInput", typeof(bool), typeof(RadialGraph), new PropertyMetadata(false));
 
 		public bool ShowSliderValue
 		{
@@ -166,31 +213,103 @@ namespace FKLabs
 			set { SetValue(ShowSliderValueProperty, value); }
 		}
 
-		public static readonly DependencyProperty ShowSliderValueProperty = DependencyProperty.Register("ShowSliderValue", typeof(bool), typeof(RadialGraph), new PropertyMetadata(false));
+        public double CurrentValue
+        {
+            get { return (double)GetValue(CurrentValueProperty); }
+            set
+            {
+                SetValue(CurrentValueProperty, value);
+            }
+        }
 
-		#endregion
+        //      public bool OverflowValueToZero
+        //{
+        //	get { return overflowValueToMinimum; }
+        //	set { overflowValueToMinimum = value; }
+        //}
 
-		#endregion
+        //[DefaultValue(false)]
+        //public bool AllowKeyboardInput
+        //{
+        //	get
+        //	{
+        //		return allowKeyboardInput;
+        //	}
 
-		#region Private fields
-		private double controlWidth;
+        //	set
+        //	{
+        //		allowKeyboardInput = value;
+
+        //		if (this.IsEnabled)
+        //		{
+        //			SliderValueTextBox.IsEnabled = value;
+        //		}
+        //	}
+        //}
+
+        //public bool ShowSliderValue
+        //{
+        //	get
+        //	{
+        //		return showSliderValue;
+        //	}
+
+        //	set
+        //	{
+        //		showSliderValue = value;
+
+        //		if (showSliderValue == true)
+        //		{
+        //			SetSliderValue(this.CurrentValue, false);
+        //			SliderValueTextBox.IsEnabled = true;
+        //		}
+        //		else
+        //		{
+        //			this.Text = sliderTextBoxText;
+        //			SliderValueTextBox.IsEnabled = false;
+        //		}
+        //	}
+        //}
+
+        #region Private fields
+
+        private double controlWidth;
 		private double controlHeight;
 		private Point zeroAnglePoint;
 		private Point centerPoint;
-		#endregion
+        private string sliderTextBoxText = "";
+        private double minimumValue = 0;
+        private double maximumValue = 100;
+        private double currentValue;
+        private bool showSliderValue = true;
+        private bool overflowValueToMinimum;
+        private bool allowKeyboardInput = false;
 
-		#region Constructor
+        #endregion Private fields
 
-		public RadialGraph()
+        public event PropertyChangedEventHandler PropertyChanged;
+        void SetValueCustom(DependencyProperty property, object value,[System.Runtime.CompilerServices.CallerMemberName] string p = null)
+        {
+            SetValue(property, value);
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(p));
+        }
+
+
+
+        #region Constructor
+
+        public RadialGraph()
 		{
 			InitializeComponent();
+
+			//LayoutRoot.DataContext = this;
+			(Content as FrameworkElement).DataContext = this;
 
 			controlWidth = this.RenderSize.Width;
 			controlHeight = this.RenderSize.Height;
 
-
-
-			//SetInputScope();
+			SetInputScope();
 
 			zeroAnglePoint = new Point(this.Width / 2, 0);
 			centerPoint = new Point(this.Width / 2, this.Height / 2);
@@ -200,14 +319,13 @@ namespace FKLabs
 			this.Unloaded += new RoutedEventHandler(RadialGraph_Unloaded);
 		}
 
-		void RadialGraph_Loaded(object sender, RoutedEventArgs e)
+		private void RadialGraph_Loaded(object sender, RoutedEventArgs e)
 		{
-
 			SliderValueTextBox.Text = Text;
 			SetSliderValue(CurrentValue, false);
 		}
 
-		#endregion
+		#endregion Constructor
 
 		#region Methods
 
@@ -234,7 +352,6 @@ namespace FKLabs
 			if (isDegrees)
 				// Calculate the slider value according to minimum and maximum values
 				CurrentValue = (int)(this.MinimumValue + (this.MaximumValue - this.MinimumValue) * newValue / 360);
-
 			else
 			{
 				CurrentValue = Convert.ToInt32(newValue);
@@ -246,7 +363,6 @@ namespace FKLabs
 			{
 				Slider.EndAngle = newValue; // Visually update the slider
 			});
-			
 
 			// Optionally show the calculated slider value on the control
 			if (ShowSliderValue)
@@ -276,11 +392,13 @@ namespace FKLabs
 			SetSliderValue(rotation, true);
 		}
 
-		static double RadianToDegree(double angle) {
+		private static double RadianToDegree(double angle)
+		{
 			return angle * (180.0 / Math.PI);
 		}
-		
-		public double Normalise (double degrees) {
+
+		public double Normalise(double degrees)
+		{
 			double retval = degrees % 360;
 			if (retval < 0)
 				retval += 360;
@@ -299,7 +417,7 @@ namespace FKLabs
 
 		private bool IsPointInsideEllipseShape(Ellipse ellipseToUse, Point point)
 		{
-			EllipseGeometry ellipse  = new EllipseGeometry();
+			EllipseGeometry ellipse = new EllipseGeometry();
 			ellipse.RadiusX = ellipseToUse.RenderSize.Width / 2;
 			ellipse.RadiusY = ellipseToUse.RenderSize.Height / 2;
 
@@ -333,7 +451,6 @@ namespace FKLabs
 			double yDistance = y - b;
 			yDistance = yDistance < 0 ? yDistance * -1 : yDistance;
 
-
 			double ellipseCalculation = (Math.Pow(xDistance, 2) / Math.Pow(a, 2)) +
 										(Math.Pow(yDistance, 2) / Math.Pow(b, 2));
 
@@ -345,11 +462,11 @@ namespace FKLabs
 			return false;
 		}
 
-		#endregion
+		#endregion Methods
 
 		#region Events
 
-		void Touch_FrameReported(object sender, TouchFrameEventArgs e)
+		private void Touch_FrameReported(object sender, TouchFrameEventArgs e)
 		{
 			TouchPoint touchPoint = e.GetTouchPoints(this)[0];
 
@@ -359,7 +476,7 @@ namespace FKLabs
 			if (this.IsEnabled && PointInsideEllipse(touchPoint.Position.X, controlWidth / 2, touchPoint.Position.Y, controlHeight / 2)
 				&& !IsPointInsideEllipseShape(InnerEllipse, touchPoint.Position))
 			{
-				/* 
+				/*
 				* Make sure that the touch point is inside the control, otherwise touch events from any
 				* point inside the app are processed. If we don't add this check and there are multiple
 				* radial sliders on the form, they will all react to all touch events on the parent page.
@@ -404,7 +521,7 @@ namespace FKLabs
 			}
 		}
 
-		void RadialGraph_Unloaded(object sender, RoutedEventArgs e)
+		private void RadialGraph_Unloaded(object sender, RoutedEventArgs e)
 		{
 			Touch.FrameReported -= new TouchFrameEventHandler(Touch_FrameReported);
 		}
@@ -421,10 +538,9 @@ namespace FKLabs
 				VisualStateManager.GoToState(this, "Normal", true);
 				if (AllowKeyboardInput)
 				{
-					SliderValueTextBox.IsEnabled = true;
+					SliderValueTextBox.IsEnabled = false;
 				}
 			}
-
 			else
 			{
 				VisualStateManager.GoToState(this, "Disabled", true);
@@ -451,11 +567,12 @@ namespace FKLabs
 		#region Custom events
 
 		public delegate void OnSliderValueChanged(object sender, SliderValueChangedEventArgs e);
+
 		public event OnSliderValueChanged SliderValueChanged;
 
-		#endregion
+		#endregion Custom events
 
-		#endregion
+		#endregion Events
 	}
 
 	public class SliderValueChangedEventArgs : EventArgs
@@ -473,6 +590,7 @@ namespace FKLabs
 		{
 			get { return this.oldValue; }
 		}
+
 		public Double NewValue
 		{
 			get { return this.newValue; }

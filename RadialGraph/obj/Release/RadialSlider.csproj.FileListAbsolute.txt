@@ -1,9 +1,0 @@
-C:\Users\mwadime\Documents\Visual Studio 2013\Projects\kcb-super-app-wp8\Controls\RadialSliderModern\RadialSlider\Bin\Release\SubsonicDesign.RadialSliderModern.dll
-C:\Users\mwadime\Documents\Visual Studio 2013\Projects\kcb-super-app-wp8\Controls\RadialSliderModern\RadialSlider\Bin\Release\SubsonicDesign.RadialSliderModern.pdb
-C:\Users\mwadime\Documents\Visual Studio 2013\Projects\kcb-super-app-wp8\Controls\RadialSliderModern\RadialSlider\Bin\Release\Microsoft.Expression.Drawing.dll
-C:\Users\mwadime\Documents\Visual Studio 2013\Projects\kcb-super-app-wp8\Controls\RadialSliderModern\RadialSlider\Bin\Release\Microsoft.Expression.Drawing.xml
-C:\Users\mwadime\Documents\Visual Studio 2013\Projects\kcb-super-app-wp8\Controls\RadialSliderModern\RadialSlider\obj\Release\RadialSliderModern.g.cs
-C:\Users\mwadime\Documents\Visual Studio 2013\Projects\kcb-super-app-wp8\Controls\RadialSliderModern\RadialSlider\obj\Release\SubsonicDesign.RadialSliderModern.g.resources
-C:\Users\mwadime\Documents\Visual Studio 2013\Projects\kcb-super-app-wp8\Controls\RadialSliderModern\RadialSlider\obj\Release\SubsonicDesign.RadialSliderModern.dll
-C:\Users\mwadime\Documents\Visual Studio 2013\Projects\kcb-super-app-wp8\Controls\RadialSliderModern\RadialSlider\obj\Release\SubsonicDesign.RadialSliderModern.pdb
-C:\Users\mwadime\Documents\Visual Studio 2013\Projects\kcb-super-app-wp8\Controls\RadialSliderModern\RadialSlider\obj\Release\RadialSlider.csprojResolveAssemblyReference.cache
