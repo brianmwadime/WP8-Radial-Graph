@@ -277,13 +277,6 @@ namespace FKLabs
 		private double controlHeight;
 		private Point zeroAnglePoint;
 		private Point centerPoint;
-        private string sliderTextBoxText = "";
-        private double minimumValue = 0;
-        private double maximumValue = 100;
-        private double currentValue;
-        private bool showSliderValue = true;
-        private bool overflowValueToMinimum;
-        private bool allowKeyboardInput = false;
 
         #endregion Private fields
 
